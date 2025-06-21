@@ -8,5 +8,6 @@ namespace Unicom_Tic_Management_System.Data
 {
     internal class Room
     {
+
     }
 }

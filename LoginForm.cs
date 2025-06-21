@@ -16,5 +16,15 @@ namespace Unicom_Tic_Management_System
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btLogin_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

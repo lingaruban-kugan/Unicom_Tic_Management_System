@@ -8,5 +8,10 @@ namespace Unicom_Tic_Management_System.Data
 {
     internal class Timetable
     {
+        public int TimetableId { get; set; }
+        public int SubjectId { get; set; }
+        public string TimeSlot { get; set; }
+        public int RoomId { get; set; }
+   
     }
 }

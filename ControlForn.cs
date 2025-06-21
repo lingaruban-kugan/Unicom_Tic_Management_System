@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace Unicom_Tic_Management_System
 {
-    public partial class TimetableForm : Form
+    public partial class ControlForn : Form
     {
-        public TimetableForm()
+        public ControlForn()
         {
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
 
         }

@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Unicom_Tic_Management_System.Data
 {
-    internal class Subject
+    public class Subject
     {
+        public int SubjectID { get; set; }
+        public string SubjectName { get; set; }
+        public int CourseID { get; set; }
     }
+
+
 }
+

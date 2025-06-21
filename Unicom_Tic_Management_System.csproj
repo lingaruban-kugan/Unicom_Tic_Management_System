@@ -51,10 +51,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlForn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlForn.Designer.cs">
+      <DependentUpon>ControlForn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\MarkController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="Controllers\SubjectControlle.cs" />
+    <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\TimetableController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="CourseForm.cs">
@@ -111,6 +118,21 @@
     <Compile Include="TimetableForm.Designer.cs">
       <DependentUpon>TimetableForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ControlForn.resx">
+      <DependentUpon>ControlForn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CourseForm.resx">
+      <DependentUpon>CourseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MarkForm.resx">
+      <DependentUpon>MarkForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -122,6 +144,9 @@
     </Compile>
     <EmbeddedResource Include="StudentForm.resx">
       <DependentUpon>StudentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimetableForm.resx">
+      <DependentUpon>TimetableForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

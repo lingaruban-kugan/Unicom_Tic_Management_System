@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Unicom_Tic_Management_System.Data
 {
-    internal class Marks
+    public class Mark
     {
+        public int MarkId { get; set; }
+        public int StudentId { get; set; }
+        public int ExamId { get; set; }
+        public int Score { get; set; }
     }
+
 }
+

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Unicom_Tic_Management_System.Data
 {
-    internal class Course
+    public class Course
     {
+        public int CourseId { get; set; }
+        public string CourseName { get; set; }
+        
+
     }
 }
