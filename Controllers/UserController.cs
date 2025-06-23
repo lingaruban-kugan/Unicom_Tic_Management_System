@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unicom_Tic_Management_System.Data;
 using Unicom_Tic_Management_System.Models;
 
 namespace Unicom_Tic_Management_System.Controllers
@@ -26,17 +27,18 @@ namespace Unicom_Tic_Management_System.Controllers
             }
         }
 
-        public static void UpdateUser(string username, string newPassword, string newRole)
+        public static void UpdateUser(string username, string newPassword, string newRole ,int ID)
         {
             using (var conn = Dbconfig.GetConnection())
             {
-                string query = "UPDATE Users SET Password = @Password, Role = @Role WHERE Username = @Username;";
+                string query = "UPDATE Users SET Password = @Password, Role = @Role ,Username = @Username WHERE UserID = @UserID;";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@Password", newPassword);
                     cmd.Parameters.AddWithValue("@Role", newRole);
                     cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Parameters.AddWithValue("@UserID", ID);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -56,30 +58,59 @@ namespace Unicom_Tic_Management_System.Controllers
             }
         }
 
-        public static List<(int UserID, string Username, string Role)> GetAllUsers()
+        public static List<User> GetAllUsers()
         {
-            var users = new List<(int, string, string)>();
+            var users = new List<User>();
 
             using (var conn = Dbconfig.GetConnection())
             {
-                string query = "SELECT UserID, Username, Role FROM Users;";
+                string query = "SELECT * FROM Users;";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
-                    {
-                        users.Add((
-                            reader.GetInt32(0),
-                            reader.GetString(1),
-                            reader.GetString(2)
-                        ));
+                    {User user = new User();
+                        user.UserID = reader.GetInt32(0);
+                        user.Username = reader.GetString(1);
+                        user.Password =reader.GetString(2);
+                        user.Role = reader.GetString(3);
+                        users.Add(user);
+                        
                     }
                 }
             }
 
             return users;
         }
+        public User GetUserById(int userId)
+        {
+            using (SQLiteConnection connection = Dbconfig.GetConnection())
+            {
+                string query = "SELECT * FROM Users WHERE UserID = @UserID";
+                using (var cmd = new SQLiteCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@UserID", userId);
+
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new User
+                            {
+                                UserID = reader.GetInt32(0),
+                                Username = reader.GetString(1),
+                                Password = reader.GetString(2),
+                                Role = reader.GetString(3)
+                            };
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
     }
 
 }

@@ -8,7 +8,7 @@ namespace Unicom_Tic_Management_System.Controllers
 {
     public class CourseController
     {
-        // ✅ Delete a course by CourseId
+        // Delete a course by CourseId
         public string DeleteCourse(int courseId)
         {
             using (SQLiteConnection connection = Dbconfig.GetConnection())
@@ -18,15 +18,13 @@ namespace Unicom_Tic_Management_System.Controllers
                 using (var cmd = new SQLiteCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("@courseID", courseId);
-
-                    connection.Open(); // ✅ Connection must be opened
                     int rows = cmd.ExecuteNonQuery();
                     return rows > 0 ? "Course deleted successfully" : "Delete failed or course not found";
                 }
             }
         }
 
-        // ✅ Get all courses
+        // Get all courses
         public List<Course> GetAllCourses()
         {
             List<Course> courses = new List<Course>();
@@ -37,7 +35,6 @@ namespace Unicom_Tic_Management_System.Controllers
 
                 using (var cmd = new SQLiteCommand(query, connection))
                 {
-                    connection.Open(); // ✅ Always open before executing
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -56,7 +53,7 @@ namespace Unicom_Tic_Management_System.Controllers
             return courses;
         }
 
-        // ✅ Get course by ID
+        //Get course by ID
         public Course GetCourseById(int courseId)
         {
             using (var connection = Dbconfig.GetConnection())
@@ -65,7 +62,6 @@ namespace Unicom_Tic_Management_System.Controllers
                 var cmd = new SQLiteCommand(query, connection);
                 cmd.Parameters.AddWithValue("@CourseId", courseId);
 
-                connection.Open();  // ✅ Must open connection
                 using (var reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
@@ -82,7 +78,7 @@ namespace Unicom_Tic_Management_System.Controllers
             return null;
         }
 
-        // ✅ Add a new course
+        // Add a new course
         public void AddCourse(string courseName)
         {
             using (SQLiteConnection connection = Dbconfig.GetConnection())
@@ -91,12 +87,11 @@ namespace Unicom_Tic_Management_System.Controllers
                 var cmd = new SQLiteCommand(query, connection);
                 cmd.Parameters.AddWithValue("@CourseName", courseName);
 
-                connection.Open(); // ✅ Must open connection
                 cmd.ExecuteNonQuery();
             }
         }
 
-        // ✅ Update course by CourseId
+        //Update course by CourseId
         public void UpdateCourse(int courseId, string newCourseName)
         {
             using (SQLiteConnection connection = Dbconfig.GetConnection())
@@ -104,9 +99,7 @@ namespace Unicom_Tic_Management_System.Controllers
                 string query = "UPDATE Courses SET CourseName = @CourseName WHERE CourseID = @CourseID";
                 var cmd = new SQLiteCommand(query, connection);
                 cmd.Parameters.AddWithValue("@CourseName", newCourseName);
-                cmd.Parameters.AddWithValue("@CourseID", courseId);
-
-                connection.Open(); // ✅ Must open connection
+                cmd.Parameters.AddWithValue("@CourseID", courseId); 
                 cmd.ExecuteNonQuery();
             }
         }

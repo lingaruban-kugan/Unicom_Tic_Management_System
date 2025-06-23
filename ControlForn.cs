@@ -21,5 +21,20 @@ namespace Unicom_Tic_Management_System
         {
 
         }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ControlForn_Load(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void butTimetable_Click(object sender, EventArgs e)
+        {
+            //LoadForm (new );
+        }
     }
 }

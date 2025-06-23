@@ -26,5 +26,10 @@ namespace Unicom_Tic_Management_System
         {
 
         }
+
+        private void txUsername_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

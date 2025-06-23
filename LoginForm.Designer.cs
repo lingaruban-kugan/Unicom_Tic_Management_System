@@ -42,6 +42,7 @@
             this.txUsername.Name = "txUsername";
             this.txUsername.Size = new System.Drawing.Size(174, 20);
             this.txUsername.TabIndex = 2;
+            this.txUsername.TextChanged += new System.EventHandler(this.txUsername_TextChanged);
             // 
             // txPassword
             // 

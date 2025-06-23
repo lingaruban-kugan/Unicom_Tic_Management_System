@@ -25,7 +25,30 @@ namespace Unicom_Tic_Management_System
         private void btnAdmin_Click(object sender, EventArgs e)
         {
             LoginForm loginForm = new LoginForm();
-            loginForm.ShowDialog();
+            loginForm.Show();
+            this.Hide();
+        }
+
+        private void btnStaff_Click(object sender, EventArgs e)
+        {
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
+            this.Hide();
+
+        }
+
+        private void btnStudent_Click(object sender, EventArgs e)
+        {
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
+            this.Hide();
+
+        }
+
+        private void btnTeacher_Click(object sender, EventArgs e)
+        {
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
             this.Hide();
         }
     }

@@ -53,6 +53,7 @@
             this.btnStaff.TabIndex = 1;
             this.btnStaff.Text = "Staff";
             this.btnStaff.UseVisualStyleBackColor = true;
+            this.btnStaff.Click += new System.EventHandler(this.btnStaff_Click);
             // 
             // btnStudent
             // 
@@ -62,6 +63,7 @@
             this.btnStudent.TabIndex = 2;
             this.btnStudent.Text = "Student";
             this.btnStudent.UseVisualStyleBackColor = true;
+            this.btnStudent.Click += new System.EventHandler(this.btnStudent_Click);
             // 
             // btnTeacher
             // 
@@ -71,6 +73,7 @@
             this.btnTeacher.TabIndex = 3;
             this.btnTeacher.Text = "Teacher";
             this.btnTeacher.UseVisualStyleBackColor = true;
+            this.btnTeacher.Click += new System.EventHandler(this.btnTeacher_Click);
             // 
             // label1
             // 
