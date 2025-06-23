@@ -20,30 +20,27 @@ namespace Unicom_Tic_Management_System
         private  CourseController _courseController;
         private int selectedStudentId = -1;
         public StudentForm()
-        {///
+        {
             InitializeComponent();
-
-            //string connStr = "";
-            //_studentController = new StudentController(connStr);  // If your StudentController also needs a connection string
-            //_courseController = new CourseController(connStr);
-
             LoadStudents();
             LoadCourse();
-        }      
+            addtocombobox();
+
+        }
         private void LoadStudents()
         {
-            //Student.DataSource = null;
             List< Student > students = _studentController.GetAllStudents();
             StudentGV.DataSource = students;
             StudentGV.Columns["StudentId"].Visible = false;
-
-            // Hide the SectionId column if it exists
-            //if (StudentGV.Columns.Contains("StudentId"))
-            //{
-            //    StudentGV.Columns["StudentId"].Visible = false;
-            //}
-
             StudentGV.ClearSelection();
+        }
+        public void addtocombobox() 
+        {
+            CourseController courseController = new CourseController();
+            List<Course> courses = courseController.GetAllCourses();
+            ComCourse.DataSource = courses;
+            ComCourse.DisplayMember = "CourseName";
+            ComCourse.ValueMember = "CourseId";
         }
         private void LoadCourse()
         {
@@ -79,13 +76,7 @@ namespace Unicom_Tic_Management_System
                 return;
             }
 
-            if (ComCourse.SelectedValue != null)
-            {
-                MessageBox.Show("Please select a section.");
-                return;
-            }
-
-
+            
             Student student = new Student
             {
                 Name = txName.Text,
@@ -203,6 +194,11 @@ namespace Unicom_Tic_Management_System
         }
 
         private void ComCourse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void StudentGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

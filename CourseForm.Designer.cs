@@ -1,4 +1,6 @@
-﻿namespace Unicom_Tic_Management_System
+﻿using System;
+
+namespace Unicom_Tic_Management_System
 {
     partial class CourseForm
     {
@@ -133,6 +135,11 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private void txCourseName_TextChanged(object sender, EventArgs e)
+        {
+           
         }
 
         #endregion

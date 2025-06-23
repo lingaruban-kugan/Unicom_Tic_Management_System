@@ -18,7 +18,7 @@ namespace Unicom_Tic_Management_System
             Migration.Createtable();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CourseForm());
+            Application.Run(new MarkForm());
         }
     }
 }

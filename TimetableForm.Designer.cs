@@ -1,4 +1,7 @@
-﻿namespace Unicom_Tic_Management_System
+﻿using System;
+using System.Windows.Forms;
+
+namespace Unicom_Tic_Management_System
 {
     partial class TimetableForm
     {
@@ -28,27 +31,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Timetanlegv = new System.Windows.Forms.DataGridView();
+            this.timetableGridView = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txSubject = new System.Windows.Forms.TextBox();
-            this.txTime = new System.Windows.Forms.TextBox();
-            this.txRoom = new System.Windows.Forms.TextBox();
+            this.txSubjectId = new System.Windows.Forms.TextBox();
+            this.txTimeSlot = new System.Windows.Forms.TextBox();
+            this.txRoomId = new System.Windows.Forms.TextBox();
             this.butADD = new System.Windows.Forms.Button();
             this.butUPDATE = new System.Windows.Forms.Button();
             this.butDELETE = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.Timetanlegv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timetableGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // Timetanlegv
+            // timetableGridView
             // 
-            this.Timetanlegv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Timetanlegv.Location = new System.Drawing.Point(184, 246);
-            this.Timetanlegv.Name = "Timetanlegv";
-            this.Timetanlegv.Size = new System.Drawing.Size(401, 150);
-            this.Timetanlegv.TabIndex = 0;
+            this.timetableGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.timetableGridView.Location = new System.Drawing.Point(184, 246);
+            this.timetableGridView.Name = "timetableGridView";
+            this.timetableGridView.Size = new System.Drawing.Size(401, 150);
+            this.timetableGridView.TabIndex = 0;
+            this.timetableGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Timetanlegv_CellContentClick);
             // 
             // label1
             // 
@@ -91,26 +95,29 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Room";
             // 
-            // txSubject
+            // txSubjectId
             // 
-            this.txSubject.Location = new System.Drawing.Point(323, 66);
-            this.txSubject.Name = "txSubject";
-            this.txSubject.Size = new System.Drawing.Size(142, 20);
-            this.txSubject.TabIndex = 5;
+            this.txSubjectId.Location = new System.Drawing.Point(323, 66);
+            this.txSubjectId.Name = "txSubjectId";
+            this.txSubjectId.Size = new System.Drawing.Size(142, 20);
+            this.txSubjectId.TabIndex = 5;
+            this.txSubjectId.TextChanged += new System.EventHandler(this.txSubjectId_TextChanged);
             // 
-            // txTime
+            // txTimeSlot
             // 
-            this.txTime.Location = new System.Drawing.Point(323, 101);
-            this.txTime.Name = "txTime";
-            this.txTime.Size = new System.Drawing.Size(142, 20);
-            this.txTime.TabIndex = 6;
+            this.txTimeSlot.Location = new System.Drawing.Point(323, 101);
+            this.txTimeSlot.Name = "txTimeSlot";
+            this.txTimeSlot.Size = new System.Drawing.Size(142, 20);
+            this.txTimeSlot.TabIndex = 6;
+            this.txTimeSlot.TextChanged += new System.EventHandler(this.txTime_TextChanged);
             // 
-            // txRoom
+            // txRoomId
             // 
-            this.txRoom.Location = new System.Drawing.Point(323, 140);
-            this.txRoom.Name = "txRoom";
-            this.txRoom.Size = new System.Drawing.Size(142, 20);
-            this.txRoom.TabIndex = 7;
+            this.txRoomId.Location = new System.Drawing.Point(323, 140);
+            this.txRoomId.Name = "txRoomId";
+            this.txRoomId.Size = new System.Drawing.Size(142, 20);
+            this.txRoomId.TabIndex = 7;
+            this.txRoomId.TextChanged += new System.EventHandler(this.txRoom_TextChanged);
             // 
             // butADD
             // 
@@ -129,6 +136,7 @@
             this.butUPDATE.TabIndex = 9;
             this.butUPDATE.Text = "UPDATE";
             this.butUPDATE.UseVisualStyleBackColor = true;
+            this.butUPDATE.Click += new System.EventHandler(this.butUPDATE_Click_1);
             // 
             // butDELETE
             // 
@@ -138,6 +146,7 @@
             this.butDELETE.TabIndex = 10;
             this.butDELETE.Text = "DELETE";
             this.butDELETE.UseVisualStyleBackColor = true;
+            this.butDELETE.Click += new System.EventHandler(this.butDELETE_Click);
             // 
             // TimetableForm
             // 
@@ -147,32 +156,61 @@
             this.Controls.Add(this.butDELETE);
             this.Controls.Add(this.butUPDATE);
             this.Controls.Add(this.butADD);
-            this.Controls.Add(this.txRoom);
-            this.Controls.Add(this.txTime);
-            this.Controls.Add(this.txSubject);
+            this.Controls.Add(this.txRoomId);
+            this.Controls.Add(this.txTimeSlot);
+            this.Controls.Add(this.txSubjectId);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.Timetanlegv);
+            this.Controls.Add(this.timetableGridView);
             this.Name = "TimetableForm";
             this.Text = "TimetableForm";
-            ((System.ComponentModel.ISupportInitialize)(this.Timetanlegv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timetableGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
+        private void txRoom_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Timetanlegv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void butUPDATE_Click_1(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void txTime_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+       
+
+
+
         #endregion
 
-        private System.Windows.Forms.DataGridView Timetanlegv;
+        private System.Windows.Forms.DataGridView timetableGridView;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txSubject;
-        private System.Windows.Forms.TextBox txTime;
-        private System.Windows.Forms.TextBox txRoom;
+        private System.Windows.Forms.TextBox txSubjectId;
+        private System.Windows.Forms.TextBox txTimeSlot;
+        private System.Windows.Forms.TextBox txRoomId;
         private System.Windows.Forms.Button butADD;
         private System.Windows.Forms.Button butUPDATE;
         private System.Windows.Forms.Button butDELETE;

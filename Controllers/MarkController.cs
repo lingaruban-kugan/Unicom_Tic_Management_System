@@ -1,39 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Unicom_Tic_Management_System.Data;
 using Unicom_Tic_Management_System.Models;
 
 namespace Unicom_Tic_Management_System.Controllers
 {
-    public class MarkController
+    internal class MarkController
     {
         public string CreateMark(Mark mark)
         {
-            using (SQLiteConnection connection = Dbconfig.GetConnection())
+            using (var connection = Dbconfig.GetConnection())
             {
                 string query = "INSERT INTO Marks (StudentID, ExamID, Score) VALUES (@StudentID, @ExamID, @Score)";
-
                 using (var cmd = new SQLiteCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("@StudentID", mark.StudentId);
                     cmd.Parameters.AddWithValue("@ExamID", mark.ExamId);
                     cmd.Parameters.AddWithValue("@Score", mark.Score);
 
-                    cmd.ExecuteNonQuery();
-                    return "Mark added successfully";
+                    int rows = cmd.ExecuteNonQuery();
+                    return rows > 0 ? "Mark added successfully." : "Failed to add mark.";
                 }
             }
         }
+
         public string UpdateMark(Mark mark)
         {
-            using (SQLiteConnection connection = Dbconfig.GetConnection())
+            using (var connection = Dbconfig.GetConnection())
             {
                 string query = "UPDATE Marks SET StudentID = @StudentID, ExamID = @ExamID, Score = @Score WHERE MarkID = @MarkID";
-
                 using (var cmd = new SQLiteCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("@StudentID", mark.StudentId);
@@ -42,35 +38,35 @@ namespace Unicom_Tic_Management_System.Controllers
                     cmd.Parameters.AddWithValue("@MarkID", mark.MarkId);
 
                     int rows = cmd.ExecuteNonQuery();
-                    return rows > 0 ? "Mark updated successfully" : "Update failed or mark not found";
+                    return rows > 0 ? "Mark updated successfully." : "Mark not found or update failed.";
                 }
             }
         }
-        public string DeleteMark(int markID)
+
+        public string DeleteMark(int markId)
         {
-            using (SQLiteConnection connection = Dbconfig.GetConnection())
+            using (var connection = Dbconfig.GetConnection())
             {
                 string query = "DELETE FROM Marks WHERE MarkID = @MarkID";
-
                 using (var cmd = new SQLiteCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@MarkID", markID);
+                    cmd.Parameters.AddWithValue("@MarkID", markId);
 
                     int rows = cmd.ExecuteNonQuery();
-                    return rows > 0 ? "Mark deleted successfully" : "Delete failed or mark not found";
+                    return rows > 0 ? "Mark deleted successfully." : "Mark not found or delete failed.";
                 }
             }
         }
+
         public List<Mark> GetAllMarks()
         {
             List<Mark> marks = new List<Mark>();
 
-            using (SQLiteConnection connection = Dbconfig.GetConnection())
+            using (var connection = Dbconfig.GetConnection())
             {
-                string query = "SELECT * FROM Marks";
-
+                string query = "SELECT MarkID, StudentID, ExamID, Score FROM Marks";
                 using (var cmd = new SQLiteCommand(query, connection))
-                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -87,30 +83,31 @@ namespace Unicom_Tic_Management_System.Controllers
 
             return marks;
         }
-        public Mark GetMarkById(int id)
-        {
-            using (var conn = Dbconfig.GetConnection())
-            {
-                var cmd = new SQLiteCommand("SELECT * FROM Marks WHERE MarkID = @MarkID", conn);
-                cmd.Parameters.AddWithValue("@MarkID", id);
-                using (var reader = cmd.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        return new Mark
-                        {
-                            MarkId = reader.GetInt32(0),
-                            StudentId = reader.GetInt32(1),
-                            ExamId = reader.GetInt32(2),
-                            Score = reader.GetInt32(3)
 
-                        };
+        public Mark GetMarkById(int markId)
+        {
+            using (var connection = Dbconfig.GetConnection())
+            {
+                string query = "SELECT MarkID, StudentID, ExamID, Score FROM Marks WHERE MarkID = @MarkID";
+                using (var cmd = new SQLiteCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@MarkID", markId);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Mark
+                            {
+                                MarkId = Convert.ToInt32(reader["MarkID"]),
+                                StudentId = Convert.ToInt32(reader["StudentID"]),
+                                ExamId = Convert.ToInt32(reader["ExamID"]),
+                                Score = Convert.ToInt32(reader["Score"])
+                            };
+                        }
                     }
                 }
             }
-
             return null;
         }
-
     }
 }

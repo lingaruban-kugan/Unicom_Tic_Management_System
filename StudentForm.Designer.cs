@@ -126,11 +126,12 @@
             // StudentGV
             // 
             this.StudentGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.StudentGV.Location = new System.Drawing.Point(137, 339);
+            this.StudentGV.Location = new System.Drawing.Point(221, 339);
             this.StudentGV.Margin = new System.Windows.Forms.Padding(4);
             this.StudentGV.Name = "StudentGV";
-            this.StudentGV.Size = new System.Drawing.Size(664, 202);
+            this.StudentGV.Size = new System.Drawing.Size(438, 202);
             this.StudentGV.TabIndex = 10;
+            this.StudentGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.StudentGV_CellContentClick);
             this.StudentGV.SelectionChanged += new System.EventHandler(this.StudentGV_CellContentClick);
             // 
             // lbStudentform
@@ -146,6 +147,7 @@
             // 
             // ComCourse
             // 
+            this.ComCourse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComCourse.FormattingEnabled = true;
             this.ComCourse.Location = new System.Drawing.Point(392, 178);
             this.ComCourse.Margin = new System.Windows.Forms.Padding(4);

@@ -8,10 +8,8 @@ namespace Unicom_Tic_Management_System.Controllers
 {
     public class CourseController
     {
-        //private string _connectionString;
-
-
-        public string DeleteCourse(int courseid)
+        // ✅ Delete a course by CourseId
+        public string DeleteCourse(int courseId)
         {
             using (SQLiteConnection connection = Dbconfig.GetConnection())
             {
@@ -19,65 +17,55 @@ namespace Unicom_Tic_Management_System.Controllers
 
                 using (var cmd = new SQLiteCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@courseID", courseid);
+                    cmd.Parameters.AddWithValue("@courseID", courseId);
 
+                    connection.Open(); // ✅ Connection must be opened
                     int rows = cmd.ExecuteNonQuery();
-                    return rows > 0 ? "Student deleted successfully" : "Delete failed or student not found";
+                    return rows > 0 ? "Course deleted successfully" : "Delete failed or course not found";
                 }
             }
         }
 
-        // ✅ Get all courses (FIXED)
+        // ✅ Get all courses
         public List<Course> GetAllCourses()
         {
-            List<Course> course = new List<Course>();
+            List<Course> courses = new List<Course>();
 
             using (SQLiteConnection connection = Dbconfig.GetConnection())
             {
                 string query = "SELECT * FROM Courses";
+
                 using (var cmd = new SQLiteCommand(query, connection))
-                using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
-                    while (reader.Read())
+                    connection.Open(); // ✅ Always open before executing
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
-                        Course couses = new Course(); 
-                        couses.CourseId = reader.GetInt32(0);
-                        couses.CourseName = reader.GetString(1);
-                        course.Add(couses);
+                        while (reader.Read())
+                        {
+                            Course course = new Course
+                            {
+                                CourseId = reader.GetInt32(0),
+                                CourseName = reader.GetString(1)
+                            };
+                            courses.Add(course);
+                        }
                     }
                 }
             }
 
-            return course;
-            /* List<Course> course = new List<Course>();
-
-             using (SQLiteConnection connection = Dbconfig.GetConnection())
-             {
-                 string query = "SELECT * FROM Courses";
-                 Course couses = new Course();
-                 using (var cmd = new SQLiteCommand(query, connection))
-                 using (SQLiteDataReader reader = cmd.ExecuteReader())
-
-
-                     while (reader.Read())
-                     {
-                         Course course = new Course();
-                         course.CourseId = reader.GetInt32(0);
-                         course.CourseName = reader.GetString(1);
-                         course.Add(course);
-                     }
-
-             }
-
-             return course;*/
+            return courses;
         }
-        public Course GetCourseById(int id)
-        {
-            using (var conn = Dbconfig.GetConnection())
-            {
-                var cmd = new SQLiteCommand("SELECT * FROM Courses WHERE CourseId = @CourseId", conn);
-                cmd.Parameters.AddWithValue("@CourseId", id);
 
+        // ✅ Get course by ID
+        public Course GetCourseById(int courseId)
+        {
+            using (var connection = Dbconfig.GetConnection())
+            {
+                string query = "SELECT * FROM Courses WHERE CourseId = @CourseId";
+                var cmd = new SQLiteCommand(query, connection);
+                cmd.Parameters.AddWithValue("@CourseId", courseId);
+
+                connection.Open();  // ✅ Must open connection
                 using (var reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
@@ -85,7 +73,7 @@ namespace Unicom_Tic_Management_System.Controllers
                         return new Course
                         {
                             CourseId = reader.GetInt32(0),
-                           CourseName = reader.GetString(1)
+                            CourseName = reader.GetString(1)
                         };
                     }
                 }
@@ -94,97 +82,33 @@ namespace Unicom_Tic_Management_System.Controllers
             return null;
         }
 
+        // ✅ Add a new course
         public void AddCourse(string courseName)
         {
             using (SQLiteConnection connection = Dbconfig.GetConnection())
             {
-                var cmd = new SQLiteCommand("INSERT INTO Courses (CourseName) VALUES (@CourseName)", connection);
+                string query = "INSERT INTO Courses (CourseName) VALUES (@CourseName)";
+                var cmd = new SQLiteCommand(query, connection);
                 cmd.Parameters.AddWithValue("@CourseName", courseName);
+
+                connection.Open(); // ✅ Must open connection
                 cmd.ExecuteNonQuery();
             }
         }
 
-
-        // Update existing Course by CourseID
+        // ✅ Update course by CourseId
         public void UpdateCourse(int courseId, string newCourseName)
         {
             using (SQLiteConnection connection = Dbconfig.GetConnection())
             {
-
-                var cmd = new SQLiteCommand("UPDATE Course SET CourseName = @CourseName WHERE CourseID = @CourseID");
+                string query = "UPDATE Courses SET CourseName = @CourseName WHERE CourseID = @CourseID";
+                var cmd = new SQLiteCommand(query, connection);
                 cmd.Parameters.AddWithValue("@CourseName", newCourseName);
                 cmd.Parameters.AddWithValue("@CourseID", courseId);
+
+                connection.Open(); // ✅ Must open connection
                 cmd.ExecuteNonQuery();
             }
         }
-
-       
-        //public string DeleteStudent(int courseid)
-        //{
-        //    using (SQLiteConnection connection = Dbconfig.GetConnection())
-        //    {
-        //        string query = "DELETE FROM Courses WHERE CourseID = @courseID";
-
-        //        using (var cmd = new SQLiteCommand(query, connection))
-        //        {
-        //            cmd.Parameters.AddWithValue("@courseID", courseid);
-
-        //            int rows = cmd.ExecuteNonQuery();
-        //            return rows > 0 ? "Student deleted successfully" : "Delete failed or student not found";
-        //        }
-        //    }
-        //}
-
-        // ✅ Get all courses (FIXED)
-        //public List<Course> GetAllStudents()
-        //{
-        //    List<Course> course = new List<Course>();
-
-        //    using (SQLiteConnection connection = Dbconfig.GetConnection())
-        //    {
-        //        string query = "SELECT * FROM Courses";
-        //        Course couses = new Course();
-        //        using (var cmd = new SQLiteCommand(query, connection))
-        //        using (SQLiteDataReader reader = cmd.ExecuteReader())
-
-        //        {
-        //            while (reader.Read())
-        //            {
-
-
-
-        //                couses.CourseId = reader.GetInt32(0);
-        //                couses.CourseName = reader.GetString(1);
-        //                course.Add(couses);
-
-
-        //            }
-        //        }
-        //    }
-
-        //    return course;
-        //}
-        //public Course GetCourseById(int id)
-        //{
-        //    using (var conn = Dbconfig.GetConnection())
-        //    {
-        //        var cmd = new SQLiteCommand("SELECT * FROM Courses WHERE CourseId = @CourseId", conn);
-        //        cmd.Parameters.AddWithValue("@CourseId", id);
-
-        //        using (var reader = cmd.ExecuteReader())
-        //        {
-        //            if (reader.Read())
-        //            {
-        //                return new Course
-        //                {
-        //                    CourseId = reader.GetInt32(0),
-        //                    CourseName = reader.GetString(1)
-        //                };
-        //            }
-        //        }
-        //    }
-
-        //    return null;
-        //}
     }
 }

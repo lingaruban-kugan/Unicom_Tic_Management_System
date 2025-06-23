@@ -83,10 +83,10 @@ namespace Unicom_Tic_Management_System.Models
                 );
 
                 CREATE TABLE IF NOT EXISTS Students (
-                    StudentID INTEGER PRIMARY KEY AUTOINCREMENT,
-                    Name TEXT NOT NULL,
+                    StuTEXT NOT NULL,
                     Address TEXt NOT NULL,
-                    CourseID INTEGER, 
+                    CourseID INTEdentID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Name GER, 
                     FOREIGN KEY(CourseID) REFERENCES Course(CourseID)
                 );
 

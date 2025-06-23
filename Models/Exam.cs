@@ -10,7 +10,9 @@ namespace Unicom_Tic_Management_System.Data
     {
         public int ExamId { get; set; }
         public string ExamName { get; set; }
-        public int SubjectId { get; set; }
+        public int CourseId { get; set; }
+        public string CourseName { get;set; }
+        public string Date { get; set; }
         
     }
 }
