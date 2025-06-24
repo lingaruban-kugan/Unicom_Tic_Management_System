@@ -166,6 +166,7 @@ namespace Unicom_Tic_Management_System
             this.Controls.Add(this.timetableGridView);
             this.Name = "TimetableForm";
             this.Text = "TimetableForm";
+            this.Load += new System.EventHandler(this.TimetableForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.timetableGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

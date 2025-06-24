@@ -12,6 +12,6 @@ namespace Unicom_Tic_Management_System.Data
         public string Name { get; set; }
         public string Address { get; set; }
         public int CourseId { get; set; }
-        //public string CourseName { get; set; }
+       
     }
 }

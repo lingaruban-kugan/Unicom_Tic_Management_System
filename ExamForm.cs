@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Unicom_Tic_Management_System.Models;
 
 namespace Unicom_Tic_Management_System
 {
@@ -25,6 +26,16 @@ namespace Unicom_Tic_Management_System
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ExamForm_Load(object sender, EventArgs e)
+        {
+            if (Role.RoleName == "Student") 
+            {
+                btnAdd.Visible = false;
+                btnUpdate.Visible = false;
+                btnDelete.Visible = false;
+            }
         }
     }
 }

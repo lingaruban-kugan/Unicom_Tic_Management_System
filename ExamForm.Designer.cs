@@ -154,6 +154,7 @@
             this.Controls.Add(this.label1);
             this.Name = "ExamForm";
             this.Text = "ExamForm";
+            this.Load += new System.EventHandler(this.ExamForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Examgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

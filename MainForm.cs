@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Unicom_Tic_Management_System.Models;
 
 namespace Unicom_Tic_Management_System
 {
@@ -42,7 +43,8 @@ namespace Unicom_Tic_Management_System
             LoginForm loginForm = new LoginForm();
             loginForm.Show();
             this.Hide();
-
+            Role.RoleName = "Student";
+            
         }
 
         private void btnTeacher_Click(object sender, EventArgs e)

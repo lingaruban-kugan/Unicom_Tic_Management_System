@@ -167,5 +167,15 @@ namespace Unicom_Tic_Management_System
         {
 
         }
+
+        private void TimetableForm_Load(object sender, EventArgs e)
+        {
+            if(Role.RoleName == "Student") 
+            {
+                butADD.Visible = false;
+                butDELETE.Visible = false;
+                butUPDATE.Visible = false;
+            }
+        }
     }
 }

@@ -163,5 +163,15 @@ namespace Unicom_Tic_Management_System
             ClearForm();
             dgvMarks.ClearSelection();
         }
+
+        private void MarkForm_Load(object sender, EventArgs e)
+        {
+            if (Role.RoleName == "Student") 
+            {
+                btnAdd.Visible = false;
+                btnDelete.Visible = false;
+                btnUpdate.Visible = false;
+            }
+        }
     }
 }
